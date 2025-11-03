@@ -1,0 +1,176 @@
+/* --- 0. Variabel Warna dan Font --- */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+
+:root {
+    --primary-red: #d32f2f;      /* Merah Berry Tua */
+    --primary-green: #2e7d32;    /* Hijau Daun Tua */
+    --accent-yellow: #ffeb3b;    /* Kuning Aksen Cerah */
+    --background-light: #f5f5f5;
+    --box-bg-info: #fff9c4;      
+    --text-dark: #212121;
+    --shadow-base: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* --- 1. Dasar Halaman --- */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#content-box {
+    display: flex;
+    width: 90%;
+    max-width: 1100px; /* Lebar lebih besar */
+    height: 550px; /* Tinggi lebih besar */
+    background-color: var(--bg-light);
+    border: 15px solid var(--primary-red);
+    border-radius: 25px; 
+    box-shadow: var(--shadow-base); 
+    overflow: hidden;
+}
+
+/* --- 2. Sisi Kiri: Informasi Beri (#pokemon-info) --- */
+#pokemon-info {
+    flex: 3; /* Ambil lebih banyak ruang untuk info/gambar */
+    padding: 30px;
+    background-color: var(--box-bg-info); 
+    border-right: 5px solid var(--primary-red);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    text-align: center;
+}
+
+#pokemon-info h2 {
+    color: var(--primary-red);
+    font-size: 2.5em; /* Judul lebih besar */
+    font-weight: 900;
+    margin-bottom: 25px;
+    border-bottom: 4px solid var(--accent-yellow);
+    padding-bottom: 10px;
+}
+
+/* GAMBAR BESAR DI TENGAH */
+#pokemon-img {
+    width: 250px; /* UKURAN LEBIH BESAR */
+    height: 250px;
+    border: 10px solid var(--text-dark);
+    border-radius: 50%; 
+    background-color: var(--bg-light);
+    margin-bottom: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); 
+    transition: transform 0.4s ease-in-out, border-color 0.4s;
+}
+
+#pokemon-img:hover {
+    transform: scale(1.05) rotate(10deg); /* Efek rotasi saat hover */
+    border-color: var(--primary-red);
+}
+
+#pokemon-types {
+    display: none !important; 
+}
+
+#pokemon-description {
+    font-size: 1.2em; /* Deskripsi lebih besar */
+    padding: 25px;
+    background-color: var(--bg-light);
+    border: 3px solid var(--primary-red);
+    border-radius: 15px;
+    box-shadow: var(--shadow-base);
+    width: 90%; 
+    text-align: left;
+    margin-top: 25px;
+}
+
+#pokemon-description h3 {
+    color: var(--primary-red);
+    font-size: 1.5em;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 5px;
+}
+
+#pokemon-description ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+#pokemon-description li {
+    background-color: var(--accent-yellow);
+    color: var(--text-dark);
+    padding: 10px 18px;
+    border-radius: 50px; 
+    font-weight: 700;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* --- 3. Sisi Kanan: Daftar Beri (#pokemon-list) --- */
+#pokemon-list {
+    flex: 1.5; /* Proporsi Daftar lebih ramping */
+    background-color: var(--primary-green); 
+    padding: 15px;
+    overflow-y: scroll;
+}
+
+#berry-search {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 3px solid var(--accent-yellow);
+    border-radius: 8px;
+    font-size: 1em;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+/* LIST BERI SEBAGAI BOX KARTU */
+.pokemon-name { 
+    padding: 15px 15px;
+    margin-bottom: 10px;
+    background-color: #444; /* Warna Kartu Normal */
+    color: #fff;
+    border-radius: 10px; /* Sudut Kotak */
+    text-align: center;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.3s, box-shadow 0.3s;
+    font-size: 1.1em;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4); /* Bayangan 3D */
+}
+
+/* EFEK HOVER KURSOOR LEBIH HIDUP */
+.pokemon-name:hover {
+    background-color: #555;
+    transform: translateY(-5px) scale(1.02); /* Lebih banyak terangkat */
+    /* Efek Glow Kuning */
+    box-shadow: 0 0 15px var(--accent-yellow), 0 10px 20px rgba(0, 0, 0, 0.5); 
+}
+
+.pokemon-name.active { 
+    background-color: var(--primary-red);
+    color: var(--bg-light);
+    /* Efek Glow Merah */
+    box-shadow: 0 0 20px var(--primary-red), 0 10px 25px rgba(0, 0, 0, 0.6);
+    transform: scale(1.02);
+}
+
+/* --- 4. Utilitas dan Loading --- */
+.loading, .error {
+    text-align: center;
+    padding: 40px;
+    font-weight: 900;
+    color: var(--accent-yellow);
+    font-size: 1.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
